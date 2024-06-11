@@ -40,16 +40,19 @@ module.exports = {
   test_settings: {
     default: {
       disable_error_log: false,
-      launch_url: 'http://localhost',
+      launch_url: 'http://localhost:4200/login',
 
       screenshots: {
-        enabled: false,
+        enabled: true,
         path: 'screens',
         on_failure: true
       },
 
       desiredCapabilities: {
-        browserName: 'chrome'
+        browserName: 'chrome',
+        chromeOptions:{
+          args:['--incognito']
+        }
       },
       
       webdriver: {
@@ -84,10 +87,19 @@ module.exports = {
     
     chrome: {
       desiredCapabilities: {
+        server_path: '/home/nashtech/Desktop/Org-x-Automation/FrontEndCompetency_MicroFrontends_E2E_with_Nightwatch/nightwatch-e2e/node_modules/.bin/chromedriver',
         browserName: 'chrome',
         'goog:chromeOptions': {
+          prefs:{
+            'autofill.profile_enabled':false,
+          },
+          w3c: true,
           // More info on Chromedriver: https://sites.google.com/a/chromium.org/chromedriver/
           args: [
+            '--incognito',
+            '--disable-extensions',
+            '--disable-infobars',
+            '--aggressive-cache-discard',
             //'--no-sandbox',
             //'--ignore-certificate-errors',
             //'--allow-insecure-localhost',
